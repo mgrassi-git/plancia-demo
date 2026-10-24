@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Plancia Mercati — dimostrazione</title>
+<title>Quota — dimostrazione</title>
 <meta name="description" content="Portafoglio, mercati, radar e prove automatiche di trading: dimostrazione con dati di esempio.">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Plancia demo">
+<meta name="apple-mobile-web-app-title" content="Quota demo">
 <meta name="theme-color" content="#0b1220">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<meta name="plancia-build" content="20261020-150237">
+<meta name="plancia-build" content="20261024-124758">
 <script>
 (function(){ const E=[]; const put=m=>{ E.push(String(m).slice(0,300)); document.documentElement.setAttribute("data-js-errors",JSON.stringify(E.slice(-10))); };
   addEventListener("error",e=>put((e.message||e.type)+(e.filename?" @"+e.filename.split("/").pop()+":"+e.lineno:"")));
   addEventListener("unhandledrejection",e=>put("Unhandled rejection: "+((e.reason&&e.reason.message)||e.reason)));
   window.__pmErrors=E; })();
 </script>
-<title>Plancia Mercati</title>
+<title>Quota</title>
 <style>
 /* Layout: app da telefono che funziona anche su computer. Nav a vetro su due righe (marchio+stato / schede), una schermata per compito, menu come fogli dal basso. Numeri grandi solo nel patrimonio. */
 :root{
@@ -537,12 +537,12 @@ footer{max-width:92ch}
 <div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="app">
 
-<div class="demobar">Dimostrazione con <b>dati di esempio</b>: quote e importi del portafoglio sono inventati, prezzi, radar, notizie e prove automatiche sono reali, fermi al 20/10/2026. Il codice sta su <a href="https://github.com/mgrassi-git/plancia-mercati" style="color:inherit">GitHub</a>.</div>
+<div class="demobar">Dimostrazione con <b>dati di esempio</b>: quote e importi del portafoglio sono inventati, prezzi, radar, notizie e prove automatiche sono reali, fermi al 24/10/2026. Il codice sta su <a href="https://github.com/mgrassi-git/plancia-mercati" style="color:inherit">GitHub</a>.</div>
 <header class="nav glass">
   <div class="navrow">
     <div class="brand">
       <div class="logo" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 5-8 4 5"/></svg></div>
-      <div class="brandtxt"><b>Plancia Mercati</b><span id="subtitle">Portafoglio Directa</span></div>
+      <div class="brandtxt"><b>Quota</b><span id="subtitle">Portafoglio Directa</span></div>
     </div>
     <div class="status">
       <button class="pill off" id="btnTheme" title="Tema: notte / giorno / automatico" aria-label="Cambia tema">☾</button>
@@ -877,7 +877,7 @@ footer{max-width:92ch}
 <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
 <script>
 /* ============================================================
-   Plancia Mercati — motore
+   Quota — motore
    Dati: feed.json pubblicato accanto alla pagina (storico 5 anni),
    poi il feeder locale sul Mac (capability files) e il documento
    feed/latest nel db (spinto dalle routine). Vince il più recente.
@@ -1705,7 +1705,7 @@ renderAutotest=function(){ _v15at.apply(this,arguments); const V=$("#atVerdict")
   V.className="heroline "+(st&&st.n>=10?(st.exp>0.3?"up":st.exp>0?"warn":"down"):"");
   const entered=op.length-waitN;
   $("#atSub").textContent=live
-    ?`Le apre e le chiude la Plancia da sola, su ${A.universe||"?"} strumenti, dal ${A.since?new Date(A.since+"T00:00:00").toLocaleDateString("it-IT",{day:"numeric",month:"long"}):"—"}. Tu non fai niente.`+(st&&st.n?"":" Le prime chiusure arrivano entro una settimana: intanto guarda lo Storico.")
+    ?`Le apre e le chiude Quota da sola, su ${A.universe||"?"} strumenti, dal ${A.since?new Date(A.since+"T00:00:00").toLocaleDateString("it-IT",{day:"numeric",month:"long"}):"—"}. Tu non fai niente.`+(st&&st.n?"":" Le prime chiusure arrivano entro una settimana: intanto guarda lo Storico.")
     :`Le stesse regole simulate sul passato${A.hist&&A.hist.window?", ultimi "+A.hist.window:""}, costi inclusi: serve a dare un ordine di grandezza, non una promessa.`;
   const T=[v15kpi("Prove chiuse",st&&st.n?String(st.n):"0",live?(st&&st.n?"fin qui":"nessuna ancora"):"simulate")];
   if(live)T.push(v15kpi("Aperte adesso",String(entered),waitN?`${waitN} in attesa dell'apertura`:"le seguo io"));
@@ -1726,7 +1726,7 @@ const V15HELP={
   patrimonio:"Il patrimonio è quello che hai su Directa: i sei ETF ai prezzi di adesso più la liquidità ferma sul conto. I prezzi arrivano da Yahoo (Borsa Italiana con circa 15 minuti di ritardo); quote e liquidità sono allineate all'estratto Directa del 18 ottobre 2026. <b>Oggi</b> confronta con la chiusura di ieri. <b>Guadagno totale</b> confronta con i soldi versati, al netto dei bolli. Tocca la tessera della liquidità per correggerla a mano.",
   oggi:"La lettura dei dati con le regole di un gestore prudente: non è un consiglio, decidi tu. La riga grande dice se il vento aiuta o no, e nasce da cinque misure — S&amp;P 500 rispetto alla sua media a 200 giorni, VIX (la paura del mercato), quanti temi azionari sono in trend, quanto si muovono tutti insieme, il dollaro. Le tre tessere: quanto fa il tuo portafoglio oggi, quando esce la prossima rata del PAC, il prossimo dato che può muovere i mercati.",
   clima:"Il clima pesa sui punteggi del Radar: quando è prudente, gli strumenti più ballerini perdono punti. Si misura con l'S&amp;P 500 rispetto alla media a 200 giorni, il VIX (sotto 18 calma, sopra 25 stress), quanti temi stanno sopra la loro media a 200 giorni, quanto si muove tutto insieme e il dollaro a 3 mesi (dollaro forte = vento contrario per emergenti e materie prime).",
-  prove:"La Plancia cerca ogni giorno quattro tipi di setup — rottura dei massimi a 20 giorni, rimbalzo da ipervenduto, squeeze degli short, spinta in corso — su 128 strumenti fra ETF, indici, materie prime, azioni italiane e americane e cripto. Su ogni setup nuovo apre <b>da sola</b> una prova da 100 € nozionali: entrata al primo prezzo a mercato aperto, stop a 1,5 oscillazioni medie, obiettivo a 2,5, chiusura dopo 7 giorni. Tu non fai niente: serve a misurare se il metodo rende <i>prima</i> di metterci soldi veri. <b>Dal vivo</b> sono le prove aperte davvero giorno per giorno, <b>Storico 2 anni</b> la stessa regola simulata sul passato, costi inclusi.",
+  prove:"Quota cerca ogni giorno quattro tipi di setup — rottura dei massimi a 20 giorni, rimbalzo da ipervenduto, squeeze degli short, spinta in corso — su 128 strumenti fra ETF, indici, materie prime, azioni italiane e americane e cripto. Su ogni setup nuovo apre <b>da sola</b> una prova da 100 € nozionali: entrata al primo prezzo a mercato aperto, stop a 1,5 oscillazioni medie, obiettivo a 2,5, chiusura dopo 7 giorni. Tu non fai niente: serve a misurare se il metodo rende <i>prima</i> di metterci soldi veri. <b>Dal vivo</b> sono le prove aperte davvero giorno per giorno, <b>Storico 2 anni</b> la stessa regola simulata sul passato, costi inclusi.",
   prove2:"Le tabelle dividono le prove per tipo di setup e per gruppo di strumenti: servono a vedere dove il metodo funziona e dove no. <b>Attesa per prova</b> è il guadagno medio di ogni prova, costi inclusi: sopra zero rende, ma sotto le 10-20 prove il numero non dice ancora niente. <b>A 20 giorni</b> guarda cosa avrebbe fatto il segnale oltre la regola di uscita a 7 giorni. In fondo trovi le prove aperte adesso e le ultime chiuse.",
   appuntamenti:"Dati macro (inflazione, tassi, lavoro) e trimestrali delle grandi aziende nei prossimi 10 giorni, con l'attesa degli analisti e il valore precedente. <b>Pesa molto</b> vuol dire che può muovere l'intero mercato: un trader non apre posizioni nelle ore prima. Fonti: ForexFactory e Yahoo.",
   mondo:"Le notizie delle ultime 48 ore raggruppate per tema (guerra, energia, tassi, dazi, Cina, tech, cripto…). Per ogni tema trovi cosa di solito sale e cosa scende in casi simili: è una regola storica, non l'andamento di oggi. Verde = di solito sale, rosso = di solito scende, ★ = ce l'hai in portafoglio.",

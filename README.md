@@ -1,6 +1,6 @@
-# Plancia Mercati — dimostrazione
+# Quota — dimostrazione
 
-Versione pubblica e **con dati di esempio** della Plancia: portafoglio, grafico, lettura del clima di
+Versione pubblica e **con dati di esempio** di Quota: portafoglio, grafico, lettura del clima di
 mercato, radar su 129 strumenti e prove automatiche di trading.
 
 👉 **https://mgrassi-git.github.io/plancia-demo/**
